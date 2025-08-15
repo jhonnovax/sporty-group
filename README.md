@@ -15,3 +15,19 @@ Build a single-page application (SPA) that consumes the All Leagues API and disp
 - Backend: Rest APIs
 - Tools: Webpack, Babel, Eslint
 
+# Scripts
+
+To install dependencies, run the following command:
+
+`npm install`
+
+To start and build the project, run the following command:
+
+`npm start`
+
+To build the distribution folder to production, run the following command:
+
+`npm run build`
+
+
+
