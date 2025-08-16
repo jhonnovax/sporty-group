@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const TTL = 1000 * 60 * 60 * Number(process.env.VUE_API_LEAGUES_CACHE_HOURS);
+const TTL = 1000 * 60 * 60 * Number(process.env.VUE_API_LEAGUES_CACHE_HOURS || 12);
 
 function getCache(key) {
     const raw = localStorage.getItem(key);

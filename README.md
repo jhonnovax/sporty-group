@@ -15,6 +15,17 @@ Build a single-page application (SPA) that consumes the All Leagues API and disp
 - Backend: Rest APIs
 - Tools: Webpack, Babel, Eslint
 
+# Environment vars
+Create a `.env` file in the root folder with the following variables:
+
+```env
+# Base URL for fetching leagues data
+VUE_API_LEAGUES_URL=https://mydomain.com
+
+# Number of hours to cache API responses (default: 12)
+VUE_API_LEAGUES_CACHE_HOURS=12
+```
+
 # Scripts
 
 To install dependencies, run the following command:
