@@ -30,4 +30,12 @@ To build the distribution folder to production, run the following command:
 `npm run build`
 
 
+# Work Sessions
+- 1 Sesion: 15 minutes
+- 2 Sesion: 45 mintes
+- 3 Session: 60 minutes
+
+It took me a bit longer because I tried to customize the Element UI library, which required some research. In the end, I decided to complete the test as it was.
+
+
 

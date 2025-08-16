@@ -41,7 +41,7 @@ export default {
             this.loading = true; 
             this.imgUrl = '';
             const data = await this.$store.dispatch('leagues/loadBadge', leagueId);
-            // La API devuelve seasons; tomamos la primera que traiga badge
+            // if API returns seasons, we take the first one that has a badge
             const seasons = data?.seasons || data || [];
             const first = Array.isArray(seasons) ? seasons.find(s => s.strBadge) : null;
             this.imgUrl = first?.strBadge || '';
