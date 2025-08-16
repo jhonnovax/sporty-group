@@ -1,3 +1,11 @@
 # Design Decisions – League List Frontend
 
-I chose Element UI because it was listed as one of the requirements in the job offer. In addition, I enjoy learning new tools—my first choice was Tailwind, but I decided to challenge myself by trying something different. 
+- File Naming: Used kebab-case for consistency and readability.
+
+- CSS Normalization: Added normalize.css to unify default styles across browsers.
+
+- UI Library: Selected Element UI, as required in the job description. (Initially considered Tailwind, but chose Element UI to learn and apply something new.)
+
+- State Management: Chose Vuex for its simplicity and reduced boilerplate compared to Redux or Zustand, making it well-suited for Vue apps.
+
+- Service Utilities: Isolated API calls into service modules, ensuring a more decoupled architecture and easier refactoring.
