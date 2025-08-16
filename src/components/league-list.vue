@@ -1,5 +1,11 @@
 <template>
     <section class="league-list">
+
+        <header class="toolbar">
+            <SearchBar />
+            <SportFilter />
+        </header>
+
         <div v-if="loading"><el-skeleton :rows="6" animated /></div>
 
         <el-empty v-else-if="!loading && filtered.length===0" description="Sin resultados" />
@@ -14,12 +20,14 @@
 
 <script>
 import LeagueCard from './league-card.vue';
-import LeagueDetail from './league-detail.vue';
+import SearchBar from './search-bar.vue';
+import SportFilter from './sport-filter.vue';
 
 export default {
     components: { 
         LeagueCard,
-        LeagueDetail
+        SearchBar,
+        SportFilter
     },
 
     computed: {
