@@ -6,3 +6,4 @@
 # Cursor AI
 - Generate webpack configuration
 - Autocomplete vue components boilerplate
+- Improved commit messages to enhance clarity and readability of code changes
