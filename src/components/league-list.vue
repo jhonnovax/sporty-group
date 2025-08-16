@@ -1,5 +1,5 @@
 <template>
-    <section class="league-list container">
+    <section class="league-list">
         <div v-if="loading"><el-skeleton :rows="6" animated /></div>
 
         <el-empty v-else-if="!loading && filtered.length===0" description="Sin resultados" />
@@ -14,15 +14,22 @@
 
 <script>
 import LeagueCard from './league-card.vue';
+import LeagueDetail from './league-detail.vue';
 
 export default {
     components: { 
-        LeagueCard 
+        LeagueCard,
+        LeagueDetail
     },
 
     computed: {
-      loading(){ return this.$store.state.leagues.loading; },
-      filtered(){ return this.$store.getters['leagues/filtered']; }
+        loading(){ 
+            return this.$store.state.leagues.loading; 
+        },
+
+        filtered(){ 
+            return this.$store.getters['leagues/filtered']; 
+        }
     },
 
     created() { 
@@ -31,27 +38,14 @@ export default {
 
     methods: {
         open(league){
-            this.selected = league;
-            this.showBadge = true;
-            
-            if (this.$route.name !== 'league') {
-                this.$router.push({ name: 'league', params: { id: league.idLeague }});
-            }
-        },
-
-        closeBadge(){
-            this.showBadge = false;
-            
-            if (this.$route.name === 'league') {
-                this.$router.push({ name: 'home' });
-            }
+            this.$router.push({ name: 'league', params: { id: league.idLeague }});
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.container { 
+.league-list { 
     width: min(1200px, 100%); 
     margin: 0 auto; 
     padding: 1rem; 
