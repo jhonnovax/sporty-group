@@ -10,6 +10,7 @@ const state = () => ({
 });
 
 const getters = {
+    badgeByLeagueId: state => state.badgeByLeagueId,
     sports: state => [...new Set(state.items.map(l => l.strSport))].sort(),
     filtered: state => state.items.filter(l => {
         const byName = l.strLeague.toLowerCase().includes(state.search.toLowerCase());

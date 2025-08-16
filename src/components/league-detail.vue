@@ -4,11 +4,11 @@
             <el-button type="primary" class="back-button" @click="$router.back()">
                 <i class="el-icon-arrow-left"></i> Go back
             </el-button>
-            <h1>{{ title }}</h1>
+            <h1>{{ leagueName }}</h1>
         </header>
         
         <div v-if="loading"><el-skeleton :rows="4" animated /></div>
-        <div v-else-if="badgeUrl"><el-image :src="badgeUrl" fit="contain" style="width:300px"/></div>
+        <div v-else-if="leagueBadge"><el-image :src="leagueBadge" fit="contain" style="width:300px"/></div>
         <el-empty v-else description="No badge available" />
     </section>
 </template>
@@ -17,17 +17,29 @@
 export default {
     data: () => ({ 
         loading: false, 
-        badgeUrl: '' 
     }),
 
     computed: { 
-        leagueDetail() {
-            const filteredLeagues = this.$store.getters['leagues/filtered']; 
-            return filteredLeagues.find(l => l.idLeague === this.$route.params.id);
+        leagueId() {
+            return this.$route.params.id;
         },
 
-        title() { 
+        leagueDetail() {
+            const filteredLeagues = this.$store.getters['leagues/filtered']; 
+
+            return filteredLeagues.find(league => league.idLeague === this.leagueId);
+        },
+
+        leagueName() { 
             return this.leagueDetail?.strLeague || 'Badge';
+        },
+
+        leagueBadge() {
+            const badgeByLeagueId = this.$store.getters['leagues/badgeByLeagueId'];
+            const seasons = badgeByLeagueId[this.leagueId]?.seasons || [];
+            const firstSeasonWithBadge = Array.isArray(seasons) ? seasons.find(s => s.strBadge) : null;
+
+            return firstSeasonWithBadge?.strBadge || '';
         }
     },
 
@@ -37,14 +49,8 @@ export default {
 
     methods: {
         async loadLeagueDetail() {
-            const leagueId = this.$route.params.id;
             this.loading = true; 
-            this.badgeUrl = '';
-            const data = await this.$store.dispatch('leagues/loadBadge', leagueId);
-            // if API returns seasons, we take the first one that has a badge
-            const seasons = data?.seasons || data || [];
-            const firstSeasonWithBadge = Array.isArray(seasons) ? seasons.find(s => s.strBadge) : null;
-            this.badgeUrl = firstSeasonWithBadge?.strBadge || '';
+            await this.$store.dispatch('leagues/loadBadge', this.leagueId);
             this.loading = false;
         }
     }
