@@ -1,6 +1,5 @@
 <template>
     <section class="league-list">
-
         <header class="toolbar">
             <SearchBar />
             <SportFilter />

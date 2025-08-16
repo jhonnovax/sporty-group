@@ -15,7 +15,7 @@ export default {
                 return this.$store.state.leagues.search; 
             },
             set(value) { 
-                this.$store.commit('leagues/setSearch', value); 
+                this.$store.dispatch('leagues/setSearch', value); 
             }
         }
     }

@@ -15,7 +15,7 @@ export default {
                 return this.$store.state.leagues.sport; 
             },
             set(value) { 
-                this.$store.commit('leagues/setSport', value); 
+                this.$store.dispatch('leagues/setSport', value); 
             }
         }
     }

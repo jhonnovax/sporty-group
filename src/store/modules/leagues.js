@@ -51,6 +51,14 @@ const actions = {
         commit('setBadge', { id, data });
 
         return data;
+    },
+
+    setSearch({ commit }, payload) {
+        commit('setSearch', payload);
+    },
+
+    setSport({ commit }, payload) {
+        commit('setSport', payload);
     }
 };
 

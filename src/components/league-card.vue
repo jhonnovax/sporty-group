@@ -1,10 +1,10 @@
 <template>
     <el-card class="league-card" shadow="hover" @click.native="openLeague">
-      <div class="league-card-title">{{ league.strLeague }}</div>
-      <div class="league-card-meta">
-        <span>{{ league.strSport }}</span>
-        <span v-if="league.strLeagueAlternate" :title="league.strLeagueAlternate"> • {{ league.strLeagueAlternate }}</span>
-      </div>
+        <div class="league-card-title">{{ league.strLeague }}</div>
+        <div class="league-card-meta">
+            <span>{{ league.strSport }}</span>
+            <span v-if="league.strLeagueAlternate" :title="league.strLeagueAlternate"> • {{ league.strLeagueAlternate }}</span>
+        </div>
     </el-card>
 </template>
 
