@@ -10,11 +10,10 @@ const state = () => ({
 });
 
 const getters = {
-    badgeByLeagueId: state => state.badgeByLeagueId,
-    sports: state => [...new Set(state.items.map(l => l.strSport))].sort(),
-    filtered: state => state.items.filter(l => {
-        const byName = l.strLeague.toLowerCase().includes(state.search.toLowerCase());
-        const bySport = !state.sport || l.strSport === state.sport;
+    sports: state => [...new Set(state.items.map(league => league.strSport))].sort(),
+    filtered: state => state.items.filter(league => {
+        const byName = league.strLeague.toLowerCase().includes(state.search.toLowerCase());
+        const bySport = !state.sport || league.strSport === state.sport;
         return byName && bySport;
     })
 };

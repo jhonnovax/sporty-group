@@ -35,7 +35,7 @@ export default {
         },
 
         leagueBadge() {
-            const badgeByLeagueId = this.$store.getters['leagues/badgeByLeagueId'];
+            const badgeByLeagueId = this.$store.state.leagues.badgeByLeagueId;
             const seasons = badgeByLeagueId[this.leagueId]?.seasons || [];
             const firstSeasonWithBadge = Array.isArray(seasons) ? seasons.find(s => s.strBadge) : null;
 

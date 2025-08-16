@@ -10,9 +10,9 @@ function getCache(key) {
     }
 
     try {
-        const { t, value } = JSON.parse(raw);
+        const { timestamp, value } = JSON.parse(raw);
 
-        if (Date.now() - t > TTL) {
+        if (Date.now() - timestamp > TTL) {
             return null;
         }
 
@@ -22,8 +22,8 @@ function getCache(key) {
     }
 }
 
-function setCache(key, v) {
-    localStorage.setItem(key, JSON.stringify({ t: Date.now(), v }));
+function setCache(key, value) {
+    localStorage.setItem(key, JSON.stringify({ timestamp: Date.now(), value }));
 }
 
 export async function fetchAllLeagues() {
