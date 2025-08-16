@@ -8,11 +8,11 @@
 
         <div v-if="loading"><el-skeleton :rows="6" animated /></div>
 
-        <el-empty v-else-if="!loading && filtered.length===0" description="Sin resultados" />
+        <el-empty v-else-if="!loading && filteredLeagues.length===0" description="There are no leagues to show" />
 
         <el-row v-else :gutter="16">
-            <el-col :sm="12" :md="8" :lg="6" v-for="league in filtered" :key="league.idLeague">
-                <LeagueCard :league="league" @open="open(league)" />
+            <el-col :sm="12" :md="8" :lg="6" v-for="league in filteredLeagues" :key="league.idLeague">
+                <LeagueCard :league="league" @open="openLeague(league)" />
             </el-col>
         </el-row>
     </section>
@@ -35,7 +35,7 @@ export default {
             return this.$store.state.leagues.loading; 
         },
 
-        filtered(){ 
+        filteredLeagues(){ 
             return this.$store.getters['leagues/filtered']; 
         }
     },
@@ -45,7 +45,7 @@ export default {
     },
 
     methods: {
-        open(league){
+        openLeague(league){
             this.$router.push({ name: 'league', params: { id: league.idLeague }});
         }
     }

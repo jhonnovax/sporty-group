@@ -8,7 +8,7 @@
         </header>
         
         <div v-if="loading"><el-skeleton :rows="4" animated /></div>
-        <div v-else-if="imgUrl"><el-image :src="imgUrl" fit="contain" style="width:300px"/></div>
+        <div v-else-if="badgeUrl"><el-image :src="badgeUrl" fit="contain" style="width:300px"/></div>
         <el-empty v-else description="Sin badge disponible" />
     </div>
 </template>
@@ -17,13 +17,13 @@
 export default {
     data: () => ({ 
         loading: false, 
-        imgUrl: '' 
+        badgeUrl: '' 
     }),
 
     computed: { 
         leagueDetail() {
-            const leagues = this.$store.getters['leagues/filtered']; 
-            return leagues.find(l => l.idLeague === this.$route.params.id);
+            const filteredLeagues = this.$store.getters['leagues/filtered']; 
+            return filteredLeagues.find(l => l.idLeague === this.$route.params.id);
         },
 
         title() { 
@@ -39,12 +39,12 @@ export default {
         async loadLeague() {
             const leagueId = this.$route.params.id;
             this.loading = true; 
-            this.imgUrl = '';
+            this.badgeUrl = '';
             const data = await this.$store.dispatch('leagues/loadBadge', leagueId);
             // if API returns seasons, we take the first one that has a badge
             const seasons = data?.seasons || data || [];
-            const first = Array.isArray(seasons) ? seasons.find(s => s.strBadge) : null;
-            this.imgUrl = first?.strBadge || '';
+            const firstSeasonWithBadge = Array.isArray(seasons) ? seasons.find(s => s.strBadge) : null;
+            this.badgeUrl = firstSeasonWithBadge?.strBadge || '';
             this.loading = false;
         }
     }

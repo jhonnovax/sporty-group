@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="not-found">
         <h1>Not Found</h1>
         <div class="actions">
             <router-link to="/">Go to Home</router-link>
@@ -8,7 +8,7 @@
 </template>
 
 <style lang="scss" scoped>
-.container {
+.not-found {
     margin: 1rem auto;
     padding: 1rem;
     text-align: center;

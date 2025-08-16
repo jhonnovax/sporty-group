@@ -10,27 +10,28 @@ const state = () => ({
 });
 
 const getters = {
-  sports: s => [...new Set(s.items.map(l => l.strSport))].sort(),
-  filtered: s => s.items.filter(l => {
-    const byName = l.strLeague.toLowerCase().includes(s.search.toLowerCase());
-    const bySport = !s.sport || l.strSport === s.sport;
+  sports: state => [...new Set(state.items.map(l => l.strSport))].sort(),
+  filtered: state => state.items.filter(l => {
+    const byName = l.strLeague.toLowerCase().includes(state.search.toLowerCase());
+    const bySport = !state.sport || l.strSport === state.sport;
     return byName && bySport;
   })
 };
 
 const mutations = {
-  setLoading: (s, v) => (s.loading = v),
-  setError: (s, e) => (s.error = e),
-  setItems: (s, arr) => (s.items = arr || []),
-  setSearch: (s, q) => (s.search = q),
-  setSport: (s, sp) => (s.sport = sp),
-  setBadge: (s, { id, data }) => (s.badgeByLeagueId = { ...s.badgeByLeagueId, [id]: data })
+  setLoading: (state, payload) => (state.loading = payload),
+  setError: (state, payload) => (state.error = payload),
+  setItems: (state, payload) => (state.items = payload || []),
+  setSearch: (state, payload) => (state.search = payload),
+  setSport: (state, payload) => (state.sport = payload),
+  setBadge: (state, payload) => (state.badgeByLeagueId = { ...state.badgeByLeagueId, [payload.id]: payload.data })
 };
 
 const actions = {
   async loadAll({ commit }) {
     commit('setLoading', true);
     commit('setError', null);
+
     try {
       const { leagues } = await fetchAllLeagues();
       commit('setItems', leagues || []);
@@ -40,10 +41,15 @@ const actions = {
       commit('setLoading', false);
     }
   },
+  
   async loadBadge({ commit, state }, id) {
-    if (state.badgeByLeagueId[id]) return state.badgeByLeagueId[id];
+    if (state.badgeByLeagueId[id]) {
+      return state.badgeByLeagueId[id];
+    }
+    
     const data = await fetchBadgeByLeagueId(id);
     commit('setBadge', { id, data });
+
     return data;
   }
 };
