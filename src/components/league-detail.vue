@@ -8,7 +8,7 @@
         </header>
         
         <div v-if="loading"><el-skeleton :rows="4" animated /></div>
-        <div v-else-if="leagueBadge"><el-image :src="leagueBadge" fit="contain" style="width:300px"/></div>
+        <div v-else-if="leagueBadge"><el-image :src="leagueBadge" fit="contain" class="badge-image"/></div>
         <el-empty v-else description="No badge available" />
     </section>
 </template>
@@ -72,10 +72,21 @@ export default {
         margin-bottom: 1rem;
 
         h1 {
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 600;
             margin: 0;
             margin-left: 1rem;
+        }
+    }
+
+    .badge-image { 
+        width: 300px;
+        max-width: 100%;
+    }
+
+    @media (width > 640px) { 
+        .header h1 { 
+            font-size: 3rem;
         }
     }
 }
