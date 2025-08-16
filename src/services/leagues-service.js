@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://www.thesportsdb.com/api/v1/json/3';
-const TTL = 1000 * 60 * 60 * 12; // 12 hours of cache
+const TTL = 1000 * 60 * 60 * Number(process.env.VUE_API_LEAGUES_CACHE_HOURS);
 
 function getCache(key) {
     const raw = localStorage.getItem(key);
@@ -35,7 +34,7 @@ export async function fetchAllLeagues() {
         return cached;
     }
 
-    const { data } = await axios.get(`${API_URL}/all_leagues.php`);
+    const { data } = await axios.get(`${process.env.VUE_API_LEAGUES_URL}/all_leagues.php`);
     setCache(key, data);
 
     return data;
@@ -49,7 +48,7 @@ export async function fetchBadgeByLeagueId(id) {
         return cached;
     }
 
-    const { data } = await axios.get(`${API_URL}/search_all_seasons.php?badge=1&id=${id}`);
+    const { data } = await axios.get(`${process.env.VUE_API_LEAGUES_URL}/search_all_seasons.php?badge=1&id=${id}`);
     setCache(key, data);
 
     return data;

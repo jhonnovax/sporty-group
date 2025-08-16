@@ -1,5 +1,5 @@
 <template>
-    <div class="league-detail">
+    <section class="league-detail">
         <header class="header">
             <el-button type="primary" class="back-button" @click="$router.back()">
                 <i class="el-icon-arrow-left"></i> Go back
@@ -9,8 +9,8 @@
         
         <div v-if="loading"><el-skeleton :rows="4" animated /></div>
         <div v-else-if="badgeUrl"><el-image :src="badgeUrl" fit="contain" style="width:300px"/></div>
-        <el-empty v-else description="Sin badge disponible" />
-    </div>
+        <el-empty v-else description="No badge available" />
+    </section>
 </template>
 
 <script>
@@ -32,11 +32,11 @@ export default {
     },
 
     created() {
-        this.loadLeague();
+        this.loadLeagueDetail();
     },
 
     methods: {
-        async loadLeague() {
+        async loadLeagueDetail() {
             const leagueId = this.$route.params.id;
             this.loading = true; 
             this.badgeUrl = '';
@@ -56,7 +56,7 @@ export default {
     background-color: #fff;
     width: min(600px, 100%); 
     margin: 0 auto; 
-    padding: 1rem;
+    padding: 24px;
     text-align: center; 
 
     .header {
