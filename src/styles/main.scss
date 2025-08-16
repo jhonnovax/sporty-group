@@ -1,3 +1,7 @@
+:root {
+    --primary-color: #e41827;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -6,5 +10,5 @@ html, body {
 }
 
 .app {
-    background-color: aqua;
+    background-color: var(--primary-color);
 }

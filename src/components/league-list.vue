@@ -6,14 +6,20 @@
 
         <el-row v-else :gutter="16">
             <el-col :sm="12" :md="8" :lg="6" v-for="league in filtered" :key="league.idLeague">
-                {{ league.strLeague }}
+                <LeagueCard :league="league" @open="open(league)" />
             </el-col>
         </el-row>
     </section>
 </template>
 
 <script>
+import LeagueCard from './league-card.vue';
+
 export default {
+    components: { 
+        LeagueCard 
+    },
+
     computed: {
       loading(){ return this.$store.state.leagues.loading; },
       filtered(){ return this.$store.getters['leagues/filtered']; }
@@ -21,6 +27,25 @@ export default {
 
     created() { 
         this.$store.dispatch('leagues/loadAll'); 
+    },
+
+    methods: {
+        open(league){
+            this.selected = league;
+            this.showBadge = true;
+            
+            if (this.$route.name !== 'league') {
+                this.$router.push({ name: 'league', params: { id: league.idLeague }});
+            }
+        },
+
+        closeBadge(){
+            this.showBadge = false;
+            
+            if (this.$route.name === 'league') {
+                this.$router.push({ name: 'home' });
+            }
+        }
     }
 }
 </script>
@@ -30,5 +55,18 @@ export default {
     width: min(1200px, 100%); 
     margin: 0 auto; 
     padding: 1rem; 
+}
+
+.toolbar { 
+    display: grid; 
+    grid-template-columns: 1fr 280px; 
+    gap: .75rem; 
+    margin-bottom: 1rem; 
+}
+
+@media (max-width: 640px) { 
+    .toolbar { 
+        grid-template-columns: 1fr; 
+    } 
 }
 </style>

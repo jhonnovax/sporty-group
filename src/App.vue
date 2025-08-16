@@ -11,9 +11,9 @@ export default {
 </script>
 
 <style lang="scss">
-    .app { 
-        min-height: 100vh; 
-        display: flex; 
-    }
+.app { 
+    min-height: 100vh; 
+    display: flex; 
+}
 </style>
   
